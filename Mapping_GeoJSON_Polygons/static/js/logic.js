@@ -42,7 +42,10 @@ d3.json(torontoHoods).then(function(data) {
 L.geoJSON(data, {
   weight: 1,
   color: "blue",
-  fillColor: "yellow"
+  fillColor: "yellow",
+  onEachFeature: function(feature, layer) {
+    layer.bindPopup("<h3>Neighbourhood: " + feature.properties.AREA_NAME + "</h3>");
+  }
 }).addTo(map);
 });
 
