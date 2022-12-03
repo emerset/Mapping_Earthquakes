@@ -29,10 +29,11 @@ let sanFranAirport =
 
 // 14.5.2
 // Grabbing our GeoJSON data.
-L.geoJSON(sanFranAirport,
+L.geoJson(sanFranAirport,
   {
     // We turn each feature into a marker on the map.
     onEachFeature: function(feature, layer) {
+      console.log(layer);
       layer.bindPopup();
      }
   }
