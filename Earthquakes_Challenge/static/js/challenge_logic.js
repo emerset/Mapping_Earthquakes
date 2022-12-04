@@ -30,11 +30,13 @@ let baseMaps = {
 
 // 1. Add a 2nd layer group for the tectonic plate data.
 let allEarthquakes = new L.LayerGroup();
+let tectonicPlates = new L.LayerGroup();
 
 
 // 2. Add a reference to the tectonic plates group to the overlays object.
 let overlays = {
-  "Earthquakes": allEarthquakes
+  "Earthquakes": allEarthquakes,
+  "Tectonic Plates": tectonicPlates
 };
 
 // Then we add a control to the map that will allow the user to change which
@@ -145,22 +147,13 @@ legend.onAdd = function() {
     // Style the lines with a color and weight that will make it stand out on all maps.
     function styleInfo(feature) {
       return {
-        color: "orange",
-        weight: 1
+        color: "#eb4034",
+        weight: 1.5
       };
     }
     // Add the tectonic layer group variable you created in Step 1 to the map, i.e., .addTo(tectonicPlates) and close the geoJSON() layer.
-    L.geoJSON(data,
-      {
-        // turn features to circleMarkers
-        pointToLayer: function(feature, latlng) {
-          console.log(data);
-          return L.circleMarker(latlng);
-        },
+    L.geoJSON(data, {
         style: styleInfo,
-        onEachFeature: function(feature, layer) {
-          layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
-        }
       }
       ).addTo(tectonicPlates);
     // Next, add the tectonic layer group variable to the map, i.e, tectonicPlates.addTo(map).
