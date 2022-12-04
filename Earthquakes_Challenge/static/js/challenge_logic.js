@@ -148,8 +148,23 @@ legend.onAdd = function() {
         color: "orange",
         weight: 1
       };
+    }
     // Add the tectonic layer group variable you created in Step 1 to the map, i.e., .addTo(tectonicPlates) and close the geoJSON() layer.
+    L.geoJSON(data,
+      {
+        // turn features to circleMarkers
+        pointToLayer: function(feature, latlng) {
+          console.log(data);
+          return L.circleMarker(latlng);
+        },
+        style: styleInfo,
+        onEachFeature: function(feature, layer) {
+          layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
+        }
+      }
+      ).addTo(tectonicPlates);
     // Next, add the tectonic layer group variable to the map, i.e, tectonicPlates.addTo(map).
+    tectonicPlates.addTo(map);
     // Finally, close the d3.json() callback.
   });
 });
